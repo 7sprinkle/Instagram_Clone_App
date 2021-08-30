@@ -16,6 +16,9 @@ gem 'bcrypt'
 gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'carrierwave'
+gem 'mini_magick'
+
 
 
 group :development, :test do

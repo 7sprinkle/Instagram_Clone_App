@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>IClone</title>
+    <title>InstaClone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    <% if logged_in? %>
+    <%= link_to "プロフィール", user_path(current_user.id) %>
+    <%= link_to "投稿一覧", pictures_path %>
+    <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+    <% else %>
+    <%= link_to "ユーザー登録", new_user_path %>
+    <%= link_to "ログイン", new_session_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

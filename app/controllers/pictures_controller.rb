@@ -68,4 +68,10 @@ class PicturesController < ApplicationController
   def picture_params
     params.require(:picture).permit(:image, :image_cache, :content, :user)
   end
+
+  def ensure_user
+    @pictures = current_user.pictures
+    @picture = @pictures.find_by(id: params[:id])
+    redirect_to new_picture_path unless @picture
+  end
 end

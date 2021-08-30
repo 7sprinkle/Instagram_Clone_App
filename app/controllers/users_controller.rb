@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  skip_before_action :login_required, only: [:new, :create]
+  before_action :ensure_current_user,only:[:show, :edit, :update]
 
   def new
     @user = User.new
@@ -8,8 +9,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @pictures = @user.pictures
-    favorites = Favorite.where(user_id: current_user.id).pluck(:picture_id)
-    @favorite_list = Picture.find(favorites)
+    #favorites = Favorite.where(user_id: current_user.id).pluck(:picture_id)
+   # @favorite_list = Picture.find(favorites)
   end
 
   def edit
