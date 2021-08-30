@@ -1,0 +1,33 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <h1><%= @user.name %>のページ</h1>
+      <p>メールアドレス: <%= @user.email %></p>
+      <% if @user.image? %>
+        <%= image_tag @user.image.url if @user.image? %>
+      <% end %>
+    </div>
+    <div class="choice">
+      <% if @user.id==@current_user.id %>
+        <%= link_to "編集", edit_user_path(@user), class: 'btn btn-primary' %>
+        <%= link_to '削除', user_path(@user), method: :delete, class: 'btn btn-danger', data: { confirm: '本当に削除しますか?' } %>
+    </div>
+    <div class="favarite_list">
+      <h4>お気に入りした写真たち</h4>
+      <table>
+        <tr>
+        <% if @favorite_list.present? %>
+          <% @favorite_list.each do |picture| %>
+              <td><%= image_tag picture.image.url %></td>
+              <td><%= picture.content %></td>
+          <% end %>
+        <% end %>
+        </tr>
+      </table>
+    <div class="new_post">
+      <%= link_to "新しく写真を投稿する", new_picture_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    </div>
+  </div>
+</div>
