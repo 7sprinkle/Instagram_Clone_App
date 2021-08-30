@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @pictures = @user.pictures
-    #favorites = Favorite.where(user_id: current_user.id).pluck(:picture_id)
-   # @favorite_list = Picture.find(favorites)
+    favorites = Favorite.where(user_id: current_user.id).pluck(:picture_id)
+    @favorite_list = Picture.find(favorites)
   end
 
   def edit
